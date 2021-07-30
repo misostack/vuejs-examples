@@ -3,10 +3,7 @@
     <header>
       <b-navbar>
         <b-navbar-item slot="brand" tag="router-link" :to="{ path: '/' }">
-          <img
-            src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
-            alt="Lightweight UI components for Vue.js based on Bulma"
-          />
+          <img alt="Vue logo" src="../assets/logo.png" />
         </b-navbar-item>
         <template #start>
           <b-navbar-item v-bind:href="BASE_URL">Home</b-navbar-item>

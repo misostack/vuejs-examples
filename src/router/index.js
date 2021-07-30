@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import chap0Routes from './chap0.routes';
 import chap1Routes from './chap1.routes';
 
 Vue.use(VueRouter);
-
-const routes = [{ path: '/', redirect: { name: 'chap1Home' } }, chap1Routes];
+// { path: '/', redirect: { name: 'chap1Home' } }
+const routes = [chap0Routes, chap1Routes];
 
 const router = new VueRouter({
   mode: 'history',
