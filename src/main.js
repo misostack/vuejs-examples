@@ -8,6 +8,17 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+// extenal styles
+const loadExternalStyleSheets = (href) => {
+  let linkElement = document.createElement('link');
+  linkElement.rel = 'stylesheet';
+  document.body.appendChild(linkElement);
+  linkElement.href = href;
+};
+const materialDesignStyle = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+// load external stylesheets
+loadExternalStyleSheets(materialDesignStyle);
+
 // plugins
 Vue.use(Buefy);
 

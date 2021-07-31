@@ -3,7 +3,7 @@ module.exports = {
   ratingPoints: 9.5,
   totalRating: 1105,
   totalSales: 1905,
-  productPrice: 480000,
+  salePrice: 480000,
   unit: 'kg',
   gift: '',
   shippingPrice: 0,

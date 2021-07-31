@@ -15,16 +15,32 @@
       </div>
 
       <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-        <a href="#">#css</a> <a href="#">#responsive</a>
-        <br />
-        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        <h3 v-text="product.name"></h3>
+        <div class="is-flex">
+          <span class="material-icons">thumb_up</span>
+          <span>{{ product.totalRating }}</span>
+
+          <span class="material-icons">sell</span>
+          <span>{{ product.totalSales }}</span>
+        </div>
+        <ratings v-bind:points="product.ratingPoints"></ratings>
+        <div>
+          <span class="material-icons">shopping_cart</span><strong v-html="'<span>Price : </span>'"></strong
+          >{{ product.salePrice | currency }} / {{ product.unit }}
+        </div>
+        <div class="is-flex">
+          <span class="material-icons">local_shipping</span>
+          <span v-if="product.shippingPrice"> {{ product.shippingPrice | currency }}</span>
+          <span v-if="!product.shippingPrice">Free ship</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+const CURRENCY = 'VND';
+import Ratings from '@/components/Ratings.vue';
 export default {
   name: 'VuejsExamplesProductcard',
   props: {
@@ -33,9 +49,19 @@ export default {
       required: true,
     },
   },
-  components: {},
+  components: { Ratings },
 
   directives: {},
+
+  filters: {
+    currency(value) {
+      if (!value) return '';
+      const formatValue = new Intl.NumberFormat().format(value);
+      return `${formatValue} ${CURRENCY}`;
+    },
+  },
+
+  created() {},
 
   data() {
     return {};
