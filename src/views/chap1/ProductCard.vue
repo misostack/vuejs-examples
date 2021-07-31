@@ -13,7 +13,10 @@
           </figure>
         </div>
       </div>
-
+      <h1>Render 5 times</h1>
+      <p>Title: {{ title }}</p>
+      <p>Color: {{ color }}</p>
+      <p>Number of products in your cart: {{ numberOfCartProducts }}</p>
       <div class="content">
         <h3 v-text="product.name"></h3>
         <div class="is-flex">
@@ -33,6 +36,7 @@
           <span v-if="product.shippingPrice"> {{ product.shippingPrice | currency }}</span>
           <span v-if="!product.shippingPrice">Free ship</span>
         </div>
+        <b-button type="is-link" @click="addToCart">Add to cart</b-button>
       </div>
     </div>
   </div>
@@ -63,8 +67,31 @@ export default {
 
   created() {},
 
+  computed: {
+    numberOfCartProducts() {
+      return this.cartData.length;
+    },
+  },
+
   data() {
-    return {};
+    return {
+      cartData: [],
+      title: new Date(),
+      color: Math.floor(Math.random() * 5),
+    };
+  },
+
+  watch: {
+    numberOfCartProducts(newValue, oldValue) {
+      console.log('oldValue:', oldValue);
+      console.log('newValue:', newValue);
+    },
+  },
+  beforeUpdate() {
+    console.log('all the data changes happened and before the output get updated.');
+  },
+  updated() {
+    console.log('The output get updated.');
   },
 
   mounted() {},
@@ -72,6 +99,26 @@ export default {
   methods: {
     imageURL(name) {
       return require(`@/assets/images/${name}`);
+    },
+    addToCart() {
+      setTimeout(() => {
+        this.title = new Date();
+      }, 100);
+      setTimeout(() => {
+        this.color = Math.floor(Math.random() * 5);
+      }, 100);
+      fetch('https://misostack.herokuapp.com/cities')
+        .then((response) => response.json())
+        .then((data) => (this.title = data.length));
+      fetch('https://misostack.herokuapp.com/cities')
+        .then((response) => response.json())
+        .then((data) => (this.color = data.length));
+      Promise.resolve(Math.floor(Math.random() * 5)).then((color) => (this.color = color));
+
+      this.cartData.push({
+        product: this.product,
+        quantity: 1,
+      });
     },
   },
 };
