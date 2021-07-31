@@ -6,6 +6,13 @@
       </figure>
     </div>
     <div class="card-content">
+      <p>Number of products in your cart: {{ numberOfCartProducts }}</p>
+      <div class="columns">
+        <div v-for="(item, idx) in cartData" :key="idx" class="column is-4">
+          <h5>Name: {{ item.product.name }}</h5>
+          <p>Price:{{ item.product.salePrice }}</p>
+        </div>
+      </div>
       <div class="media">
         <div class="is-flex">
           <figure v-for="(colorImage, key) in product.colorImages" :key="key" class="column image is-48x48">
@@ -16,7 +23,6 @@
       <h1>Render 5 times</h1>
       <p>Title: {{ title }}</p>
       <p>Color: {{ color }}</p>
-      <p>Number of products in your cart: {{ numberOfCartProducts }}</p>
       <div class="content">
         <h3 v-text="product.name"></h3>
         <div class="is-flex">
